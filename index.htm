@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategic Blue // Strategic Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #2D05FF;
+    --primary-hover: #2202CD;
+    --charcoal: #0E1111;
+    --grey: #666666;
+    --light-grey: #F7F6F6;
+    --white: #FFFFFF;
+    --black: #000000;
+    --border: rgba(0,0,0,0.1);
+    --border-strong: rgba(0,0,0,0.2);
+    --green: #1A7A6D;
+    --green-bg: #E6F3F1;
+    --slate: #3D5A6E;
+    --slate-bg: #E8EEF2;
+    --amber: #B8860B;
+    --amber-bg: #FDF5E6;
+    --bar-track: #E8E4DF;
+    --red: #D93025;
+    --red-bg: rgba(217,48,37,0.08);
+    --green-accent: #1E8E3E;
+    --green-accent-bg: rgba(30,142,62,0.08);
+    --amber-accent: #D29922;
+    --amber-accent-bg: rgba(210,153,34,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--white);
+    color: var(--charcoal);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ===== HEADER ===== */
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 0 28px;
+  }
+
+  .brand-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+
+  .brand-mark {
+    width: 28px;
+    height: 28px;
+    background: var(--primary);
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--charcoal);
+  }
+
+  .header-title {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.04em;
+    margin-bottom: 8px;
+    color: var(--charcoal);
+  }
+
+  .header-sub {
+    font-size: 14px;
+    color: var(--grey);
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  /* ===== TABS ===== */
+  .tab-bar {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    background: var(--white);
+    z-index: 100;
+  }
+
+  .tab-btn {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--grey);
+    background: none;
+    border: none;
+    padding: 16px 24px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+
+  .tab-btn:hover {
+    color: var(--charcoal);
+  }
+
+  .tab-btn.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+  }
+
+  /* ===== PANELS ===== */
+  .panel {
+    display: none;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    animation: panelIn 0.3s ease;
+  }
+
+  .panel.active {
+    display: block;
+  }
+
+  @keyframes panelIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== MOAT ANALYSIS STYLES ===== */
+  .thesis-box {
+    background: var(--light-grey);
+    border-left: 3px solid var(--primary);
+    padding: 20px 24px;
+    margin-bottom: 36px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .thesis-box strong {
+    font-weight: 600;
+  }
+
+  .legend {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--grey);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+
+  .legend-dot.established { background: var(--green); }
+  .legend-dot.developing { background: var(--slate); }
+  .legend-dot.emerging { background: var(--amber); }
+
+  .moat-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+
+  .moat-card:hover {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+
+  .moat-header {
+    display: flex;
+    align-items: stretch;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .moat-rank {
+    width: 48px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .moat-rank.established { background: var(--green); }
+  .moat-rank.developing { background: var(--slate); }
+  .moat-rank.emerging { background: var(--amber); }
+
+  .moat-title-area {
+    flex: 1;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .moat-name {
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: -0.02em;
+  }
+
+  .moat-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .moat-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  .moat-tag.established { background: var(--green-bg); color: var(--green); }
+  .moat-tag.developing { background: var(--slate-bg); color: var(--slate); }
+  .moat-tag.emerging { background: var(--amber-bg); color: var(--amber); }
+
+  .moat-toggle {
+    font-size: 16px;
+    color: var(--grey);
+    transition: transform 0.2s;
+    line-height: 1;
+  }
+
+  .moat-card.open .moat-toggle {
+    transform: rotate(180deg);
+  }
+
+  .moat-body {
+    display: none;
+    padding: 0 16px 20px 64px;
+  }
+
+  .moat-card.open .moat-body {
+    display: block;
+  }
+
+  .moat-description {
+    font-size: 14px;
+    color: var(--charcoal);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .moat-dims {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+    margin-bottom: 16px;
+  }
+
+  .moat-bar-section { margin-bottom: 8px; }
+
+  .moat-bar-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .bar-value {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--charcoal);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .moat-bar-track {
+    height: 5px;
+    background: var(--bar-track);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .moat-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.6s ease;
+  }
+
+  .moat-bar-fill.high { background: var(--green); }
+  .moat-bar-fill.mid { background: var(--slate); }
+  .moat-bar-fill.low { background: var(--amber); }
+
+  .moat-actions {
+    padding: 14px 16px;
+    background: var(--light-grey);
+    border-left: 2px solid var(--primary);
+    border-radius: 0 4px 4px 0;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .moat-actions .actions-title {
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+
+  .moat-actions ul {
+    margin: 0;
+    padding-left: 16px;
+    color: var(--charcoal);
+  }
+
+  .moat-actions li { margin-bottom: 4px; }
+  .moat-actions li:last-child { margin-bottom: 0; }
+
+  .flywheel-section {
+    margin-top: 48px;
+    background: var(--light-grey);
+    border-radius: 8px;
+    padding: 28px;
+  }
+
+  .flywheel-section h2 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin-bottom: 14px;
+  }
+
+  .flywheel-section p {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+
+  .flywheel-section p:last-child { margin-bottom: 0; }
+
+  /* ===== COMPETITIVE LANDSCAPE STYLES ===== */
+  .comp-intro {
+    font-size: 14px;
+    color: var(--grey);
+    max-width: 640px;
+    margin-bottom: 28px;
+    line-height: 1.65;
+  }
+
+  .comp-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .comp-tab {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--grey);
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .comp-tab:hover {
+    border-color: var(--border-strong);
+    color: var(--charcoal);
+  }
+
+  .comp-tab.active {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(45,5,255,0.04);
+  }
+
+  .comp-tab-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .comp-tab[data-comp="prosperops"] .comp-tab-dot { background: #F7931E; }
+  .comp-tab[data-comp="cloudfix"] .comp-tab-dot { background: #1E8E3E; }
+  .comp-tab[data-comp="zesty"] .comp-tab-dot { background: #D93070; }
+
+  .comp-tab-meta {
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--grey);
+    letter-spacing: 0.3px;
+    margin-left: 4px;
+  }
+
+  .comp-panel {
+    display: none;
+    animation: panelIn 0.3s ease;
+  }
+
+  .comp-panel.active { display: block; }
+
+  .profile-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+
+  .profile-cell {
+    background: var(--white);
+    padding: 18px 22px;
+  }
+
+  .profile-cell:first-child {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .profile-name {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+  }
+
+  .profile-tagline {
+    color: var(--grey);
+    font-size: 13px;
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  .profile-badge {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .badge-threat { background: var(--red-bg); color: var(--red); }
+  .badge-watch { background: var(--amber-accent-bg); color: var(--amber-accent); }
+  .badge-indirect { background: var(--green-accent-bg); color: var(--green-accent); }
+
+  .cell-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 6px;
+  }
+
+  .cell-value {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .cell-value strong {
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  .analysis-section {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    transition: border-color 0.2s;
+  }
+
+  .analysis-section:hover {
+    border-color: var(--border-strong);
+  }
+
+  .analysis-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    cursor: pointer;
+    background: var(--white);
+    transition: background 0.15s;
+    user-select: none;
+  }
+
+  .analysis-header:hover {
+    background: var(--light-grey);
+  }
+
+  .analysis-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .icon-works { background: var(--green-accent-bg); color: var(--green-accent); }
+  .icon-doesnt { background: var(--red-bg); color: var(--red); }
+  .icon-implication { background: var(--amber-accent-bg); color: var(--amber-accent); }
+
+  .analysis-title {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    flex: 1;
+  }
+
+  .analysis-chevron {
+    width: 18px;
+    height: 18px;
+    color: var(--grey);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+
+  .analysis-section.open .analysis-chevron {
+    transform: rotate(180deg);
+  }
+
+  .analysis-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .analysis-section.open .analysis-body {
+    max-height: 800px;
+  }
+
+  .analysis-content {
+    padding: 4px 20px 20px 64px;
+    font-size: 14px;
+    color: var(--grey);
+    line-height: 1.75;
+  }
+
+  .analysis-content p { margin-bottom: 12px; }
+  .analysis-content p:last-child { margin-bottom: 0; }
+
+  .highlight {
+    color: var(--charcoal);
+    font-weight: 500;
+  }
+
+  .callout {
+    background: rgba(45,5,255,0.04);
+    border-left: 3px solid var(--primary);
+    padding: 14px 18px;
+    border-radius: 0 6px 6px 0;
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--charcoal);
+    line-height: 1.65;
+  }
+
+  /* ===== MATRIX TABLE ===== */
+  .matrix-section {
+    margin-top: 48px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+
+  .matrix-title {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+  }
+
+  .matrix-sub {
+    color: var(--grey);
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+
+  .matrix-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .matrix-table {
+    width: 100%;
+    min-width: 700px;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 13px;
+  }
+
+  .matrix-table thead { background: var(--light-grey); }
+
+  .matrix-table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.3px;
+    color: var(--grey);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .matrix-table th:first-child {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 10px;
+  }
+
+  .matrix-table th.col-sb { color: var(--primary); }
+
+  .matrix-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.5;
+    color: var(--grey);
+  }
+
+  .matrix-table tr:last-child td { border-bottom: none; }
+
+  .matrix-table td:first-child {
+    font-weight: 600;
+    color: var(--charcoal);
+    white-space: nowrap;
+  }
+
+  .matrix-table tbody tr { transition: background 0.1s; }
+  .matrix-table tbody tr:hover { background: var(--light-grey); }
+
+  .cell-check { color: var(--green-accent); font-weight: 700; }
+  .cell-cross { color: var(--red); font-weight: 700; }
+  .cell-partial { color: var(--amber-accent); font-weight: 600; }
+  .cell-strong { color: var(--charcoal); font-weight: 500; }
+
+  /* ===== TAKEAWAY ===== */
+  .takeaway {
+    margin-top: 48px;
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--light-grey);
+  }
+
+  .takeaway-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+
+  .takeaway-text {
+    font-size: 14px;
+    color: var(--grey);
+    line-height: 1.75;
+  }
+
+  .takeaway-text strong {
+    color: var(--charcoal);
+    font-weight: 600;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .header-title { font-size: 24px; }
+    .moat-body { padding-left: 16px; }
+    .moat-dims { grid-template-columns: 1fr; }
+    .profile-card { grid-template-columns: 1fr; }
+    .profile-cell:first-child { flex-direction: column; }
+    .comp-tabs { flex-direction: column; }
+    .comp-tab { justify-content: flex-start; }
+    .analysis-content { padding-left: 20px; }
+    .matrix-table th, .matrix-table td { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand-row">
+      <div class="brand-mark"></div>
+      <span class="brand-name">Strategic Blue</span>
+    </div>
+    <h1 class="header-title">Strategic Analysis</h1>
+    <p class="header-sub">Competitive intelligence and defensible advantage mapping. Internal strategy document prepared for the Strategic Blue marketing engagement.</p>
+  </div>
+</header>
+
+<nav class="tab-bar">
+  <button class="tab-btn active" data-panel="moat" onclick="switchTab('moat')">Competitive Moat Analysis</button>
+  <button class="tab-btn" data-panel="landscape" onclick="switchTab('landscape')">Competitive Landscape</button>
+</nav>
+
+<!-- ======================== MOAT ANALYSIS PANEL ======================== -->
+<div class="panel active" id="panel-moat">
+
+  <div class="thesis-box">
+    <strong>The strategic thesis:</strong> ReFocus sits at the centre of the moat strategy. By leading with predictive intelligence, Strategic Blue creates a compounding data advantage that gets stronger with every customer onboarded. The other seven moats reinforce this core: AWS relationships drive referrals into the funnel, switching costs keep customers contributing data, domain expertise powers the forecasting model, and the personal touch converts prospects who need more than a dashboard. Together, they form a defensible system that no single competitor can replicate.
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot established"></div> Established</div>
+    <div class="legend-item"><div class="legend-dot developing"></div> Developing</div>
+    <div class="legend-item"><div class="legend-dot emerging"></div> Emerging</div>
+  </div>
+
+  <div id="moat-list"></div>
+
+  <div class="flywheel-section">
+    <h2>The Flywheel Effect</h2>
+    <p>These moats are not independent. They reinforce each other in a cycle. ReFocus gives prospects a reason to engage without friction. The forecasting value earns enough trust to share CUR data. CUR data deepens switching costs and feeds back into the model. Better data produces better forecasts, which drives more referrals from AWS AMs who see real results. And the personal touch at every stage turns satisfied customers into advocates.</p>
+    <p>The marketing strategy (Be Found, Be Understood, Be Trusted) maps directly to this flywheel. Visibility gets prospects into the cycle. Clear messaging helps them understand the value. Trust-building content reduces the friction of data sharing. Each pillar accelerates the moats that matter most.</p>
+  </div>
+
+</div>
+
+<!-- ======================== COMPETITIVE LANDSCAPE PANEL ======================== -->
+<div class="panel" id="panel-landscape">
+
+  <p class="comp-intro">Three competitors, three positioning strategies. Each reveals a gap Strategic Blue can exploit. Click each competitor to explore what works, what doesn't, and why it matters.</p>
+
+  <div class="comp-tabs">
+    <button class="comp-tab active" data-comp="prosperops" onclick="showComp('prosperops')">
+      <span class="comp-tab-dot"></span>
+      ProsperOps
+      <span class="comp-tab-meta">// Now Flexera</span>
+    </button>
+    <button class="comp-tab" data-comp="cloudfix" onclick="showComp('cloudfix')">
+      <span class="comp-tab-dot"></span>
+      CloudFix / RightSpend
+      <span class="comp-tab-meta">// Emerging</span>
+    </button>
+    <button class="comp-tab" data-comp="zesty" onclick="showComp('zesty')">
+      <span class="comp-tab-dot"></span>
+      Zesty
+      <span class="comp-tab-meta">// Pivoting</span>
+    </button>
+  </div>
+
+  <!-- ProsperOps -->
+  <div class="comp-panel active" id="comp-prosperops">
+    <div class="profile-card">
+      <div class="profile-cell">
+        <div>
+          <div class="profile-name">ProsperOps</div>
+          <div class="profile-tagline">Autonomous discount management across AWS, Azure, and GCP. Acquired by Flexera (Thoma Bravo) on 6 January 2026. $6B annual cloud spend under management.</div>
+        </div>
+        <span class="profile-badge badge-threat">Primary threat</span>
+      </div>
+      <div class="profile-cell"><div class="cell-label">Founded</div><div class="cell-value">2018, Austin TX</div></div>
+      <div class="profile-cell"><div class="cell-label">Pricing Model</div><div class="cell-value">% of savings generated (via AWS Marketplace)</div></div>
+      <div class="profile-cell"><div class="cell-label">Core Metric</div><div class="cell-value"><strong>Effective Savings Rate (ESR)</strong></div></div>
+      <div class="profile-cell"><div class="cell-label">Key Claim</div><div class="cell-value">Customers increase monthly savings by <strong>68%</strong> on average</div></div>
+    </div>
+
+    <div class="analysis-section open">
+      <div class="analysis-header" onclick="toggleAnalysis(this)">
+        <div class="analysis-icon icon-works">&#10003;</div>
+        <div class="analysis-title">What Works for Them</div>
+        <svg class="analysis-chevron" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="analysis-body"><div class="analysis-content">
+        <p><span class="highlight">Minimal onboarding friction.</span> Customers consistently describe setup taking hours, not weeks. IAM role access only, no agents, no scripts. The "set it and forget it" narrative is perfectly calibrated for CTOs who don't want another thing to manage.</p>
+        <p><span class="highlight">One metric that makes the sale.</span> Everything funnels to Effective Savings Rate. It's simple, measurable, and directly comparable. This makes evaluation and internal justification trivially easy for prospects.</p>
+        <p><span class="highlight">Aligned pricing removes objections.</span> Charging a percentage of savings means the ROI argument is self-evident. Customers frequently cite 20-22% ESR improvements net of fees. Their bill pays for itself.</p>
+        <p><span class="highlight">Multi-cloud coverage.</span> AWS, Azure, and Google Cloud in a single platform. Strategic Blue is AWS-only, which narrows the addressable market against this competitor.</p>
+      </div></div>
+    </div>
+
+    <div class="analysis-section">
+      <div class="analysis-header" onclick="toggleAnalysis(this)">
+        <div class="analysis-icon icon-doesnt">&#10007;</div>
+        <div class="analysis-title">What Doesn't Work</div>
+        <svg class="analysis-chevron" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="analysis-body"><div class="analysis-content">
+        <p><span class="highlight">The Flexera acquisition is a genuine vulnerability.</span> Many customers chose ProsperOps because it was independent and focused. Flexera's playbook of acquisition-then-integration is well-documented. "Continue operating under its own brand" is standard language that means nothing 18 months from now.</p>
+        <p><span class="highlight">Bundling pressure is inevitable.</span> Enterprise acquirers upsell. Customers will face pricing changes, roadmap drift toward Flexera's enterprise priorities, and pressure to adopt the broader Flexera One platform.</p>
+        <p><span class="highlight">It's a faceless SaaS product.</span> Reviews mention responsive support, but nobody talks about a named account manager who understands their business context. The relationship is transactional. When things get complex, there's no human layer to fall back on.</p>
+        <p><span class="highlight">Unrealized fee risk.</span> If a customer terminates, ProsperOps bills for up to 12 months of unrealized savings on existing commitments. This creates a quiet lock-in that isn't obvious at sign-up.</p>
+      </div></div>
+    </div>
+
+    <div class="analysis-section">
+      <div class="analysis-header" onclick="toggleAnalysis(this)">
+        <div class="analysis-icon icon-implication">&#9670;</div>
+        <div class="analysis-title">Strategic Implication for Strategic Blue</div>
+        <svg class="analysis-chevron" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="analysis-body"><div class="analysis-content">
+        <p>The Flexera acquisition creates a concrete switching trigger that didn't exist six weeks ago. ProsperOps customers are re-evaluating. The window to capture switching intent is roughly 6-12 months before concerns either materialise or dissipate.</p>
+        <div class="callout">The messaging opportunity isn't to attack ProsperOps directly. It's to position around what enterprise acquisition means for focused customers: "Your optimization tool just became someone else's feature."</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- CloudFix -->
+  <div class="comp-panel" id="comp-cloudfix">
+    <div class="profile-card">
+      <div class="profile-cell">
+        <div>
+          <div class="profile-name">CloudFix / RightSpend</div>
+          <div class="profile-tagline">Commitment Free Discounts (CFDs) for AWS EC2. Claims 40-55% savings without any lock-in through hourly rebalancing of Convertible Reserved Instances.</div>
+        </div>
+        <span class="profile-badge badge-watch">Rising contender</span>
+      </div>
+      <div class="profile-cell"><div class="cell-label">Target Market</div><div class="cell-value">$1M+ annual EC2 spend</div></div>
+      <div class="profile-cell"><div class="cell-label">Pricing Model</div><div class="cell-value"><strong>20-25%</strong> of net new savings</div></div>
+      <div class="profile-cell"><div class="cell-label">Scope</div><div class="cell-value">AWS EC2 only (by design)</div></div>
+      <div class="profile-cell"><div class="cell-label">Key Differentiator</div><div class="cell-value"><strong>Zero commitment lock-in</strong></div></div>
+    </div>
+
+    <div class="analysis-section open">
+      <div class="analysis-header" onclick="toggleAnalysis(this)">
+        <div class="analysis-icon icon-works">&#10003;</div>
+        <div class="analysis-title">What Works for Them</div>
+        <svg class="analysis-chevron" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="analysis-body"><div class="analysis-content">
+        <p><span class="highlight">"No commitment" is genuinely differentiated messaging.</span> While ProsperOps and Strategic Blue both manage commitments on behalf of the customer (reducing but not eliminating lock-in), CloudFix claims to eliminate it entirely. For risk-averse CTOs, this is a compelling pitch.</p>
+        <p><span class="highlight">Aggressive competitive content marketing.</span> Their ProsperOps acquisition blog post went live within 48 hours, clearly designed to capture switching intent. They create comparison pages, checklists, and competitor-specific landing pages. They play offence.</p>
+        <p><span class="highlight">30-day free trial with guaranteed results.</span> "Measurable savings within 30 days or you pay nothing." This removes the last barrier to evaluation. Compare this to Strategic Blue's current requirement to share CUR access before prospects see any value.</p>
+        <p><span class="highlight">Transparent pricing.</span> 20-25% of net new savings, stated publicly. No negotiation needed. No hidden fees. No contract lock-in.</p>
+      </div></div>
+    </div>
+
+    <div class="analysis-section">
+      <div class="analysis-header" onclick="toggleAnalysis(this)">
+        <div class="analysis-icon icon-doesnt">&#10007;</div>
+        <div class="analysis-title">What Doesn't Work</div>
+        <svg class="analysis-chevron" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="analysis-body"><div class="analysis-content">
+        <p><span class="highlight">AWS-only by design.</span> This limits their addressable market as companies go multi-cloud. It's a deliberate constraint, but one that will narrow their runway over time.</p>
+        <p><span class="highlight">Structural dependence on Convertible RIs.</span> Their "commitment free" model relies on Convertible RIs, which AWS is phasing out for new instance types. This is the same structural risk that threatens Strategic Blue, but CloudFix doesn't acknowledge it in their marketing.</p>
+        <p><span class="highlight">Content quality is inconsistent.</span> Some technical specification pages read like AI-generated text with inflated metrics ("99.7% accuracy," "quantum-inspired optimization"). This undermines credibility for technical evaluators who can spot the noise.</p>
+        <p><span class="highlight">Thin customer proof.</span> Compared to ProsperOps' deep bench of Marketplace reviews and G2 ratings, CloudFix's social proof is noticeably thinner. One large case study (Ellucian) does most of the heavy lifting.</p>
+      </div></div>
+    </div>
+
+    <div class="analysis-section">
+      <div class="analysis-header" onclick="toggleAnalysis(this)">
+        <div class="analysis-icon icon-implication">&#9670;</div>
+        <div class="analysis-title">Strategic Implication for Strategic Blue</div>
+        <svg class="analysis-chevron" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="analysis-body"><div class="analysis-content">
+        <p>CloudFix validates that "flexibility without lock-in" resonates as a message, which is Strategic Blue's core value proposition. But CloudFix pursues it through a purely automated, self-serve model.</p>
+        <div class="callout">Strategic Blue's opportunity is to deliver the same outcome but with human expertise layered on. Particularly for the forecasting complexity that algorithms alone can't anticipate. The self-serve assessment tool (Campaign 1 in the strategy) should directly counter CloudFix's free trial with something that demonstrates value before asking for CUR access.</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- Zesty -->
+  <div class="comp-panel" id="comp-zesty">
+    <div class="profile-card">
+      <div class="profile-cell">
+        <div>
+          <div class="profile-name">Zesty</div>
+          <div class="profile-tagline">Multi-layer Kubernetes optimization platform. Commitment Manager is one product within a broader infrastructure automation suite including pod rightsizing, storage scaling, and spot management.</div>
+        </div>
+        <span class="profile-badge badge-indirect">Indirect competitor</span>
+      </div>
+      <div class="profile-cell"><div class="cell-label">Founded</div><div class="cell-value">2019, Israel (HQ San Mateo, CA)</div></div>
+      <div class="profile-cell"><div class="cell-label">Pricing Model</div><div class="cell-value">% of savings, success-based</div></div>
+      <div class="profile-cell"><div class="cell-label">Key Evolution</div><div class="cell-value">Shifted from RI management to <strong>micro-Savings Plans</strong></div></div>
+      <div class="profile-cell"><div class="cell-label">Platform Play</div><div class="cell-value">K8s optimization, not pure rate optimization</div></div>
+    </div>
+
+    <div class="analysis-section open">
+      <div class="analysis-header" onclick="toggleAnalysis(this)">
+        <div class="analysis-icon icon-works">&#10003;</div>
+        <div class="analysis-title">What Works for Them</div>
+        <svg class="analysis-chevron" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="analysis-body"><div class="analysis-content">
+        <p><span class="highlight">"Multi-layer optimization" is compelling for engineering buyers.</span> Rather than selling rate optimization in isolation, Zesty wraps it into a stack-wide story: compute, storage, commitments, and spot instances. For engineering teams who think in systems, not financial instruments, this narrative resonates.</p>
+        <p><span class="highlight">Micro-Savings Plans approach is technically interesting.</span> Buying many small, short-duration commitments rather than large long-term ones gives flexibility similar to Strategic Blue's pooled model, but through a different mechanism. This may represent where the market is heading as convertible RIs phase out.</p>
+        <p><span class="highlight">AWS Marketplace reviews are genuinely positive.</span> Customers describe 5+ year relationships, 85-95% coverage rates, and consistently hands-off operation. Multiple reviews mention the "insurance plan" where Zesty absorbs the cost of any overcommitment mistakes.</p>
+        <p><span class="highlight">Well-funded and credentialed.</span> $75M+ raised, AWS Advanced Technology Partner status, and active presence at re:Invent. They're not going away.</p>
+      </div></div>
+    </div>
+
+    <div class="analysis-section">
+      <div class="analysis-header" onclick="toggleAnalysis(this)">
+        <div class="analysis-icon icon-doesnt">&#10007;</div>
+        <div class="analysis-title">What Doesn't Work</div>
+        <svg class="analysis-chevron" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="analysis-body"><div class="analysis-content">
+        <p><span class="highlight">Diluted rate optimization story.</span> By broadening into Kubernetes, Zesty has buried its commitment management product. Their homepage barely mentions it. For a prospect whose primary problem is "I'm overpaying on AWS commitments," Zesty's messaging doesn't immediately signal they solve that.</p>
+        <p><span class="highlight">Not purpose-built for rate optimization.</span> Commitment Manager is a feature within a platform, not the core product. For companies that need deep, nuanced rate optimization, a dedicated solution will always outperform a feature in a broader suite.</p>
+        <p><span class="highlight">Micro-Savings Plans depend on AWS continuing to offer short-duration instruments.</span> If AWS tightens these options (as they've shown willingness to do with RIs), Zesty's flexibility mechanism breaks.</p>
+        <p><span class="highlight">Israel HQ creates timezone friction for UK prospects.</span> Reviews note this hasn't been a major issue, but for Strategic Blue's UK-heavy target market, local presence and timezone alignment matter for the trust-building phase.</p>
+      </div></div>
+    </div>
+
+    <div class="analysis-section">
+      <div class="analysis-header" onclick="toggleAnalysis(this)">
+        <div class="analysis-icon icon-implication">&#9670;</div>
+        <div class="analysis-title">Strategic Implication for Strategic Blue</div>
+        <svg class="analysis-chevron" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="analysis-body"><div class="analysis-content">
+        <p>Zesty represents the "platform play" direction: commitment management as a feature, not a business. This is the opposite of what Strategic Blue should do. Zesty's diluted focus makes them less competitive for the pure rate optimization buyer.</p>
+        <div class="callout">Zesty's micro-Savings Plans approach is worth studying as a potential evolution of Strategic Blue's pooled commitment model, particularly as convertible RIs phase out. The mechanism is different, but the principle (many small flexible commitments vs. few large rigid ones) mirrors Strategic Blue's strategic instinct.</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- Comparison Matrix -->
+  <div class="matrix-section">
+    <h2 class="matrix-title">Competitive Positioning Matrix</h2>
+    <p class="matrix-sub">How Strategic Blue's model compares across the dimensions that matter to target accounts.</p>
+    <div class="matrix-wrap">
+    <table class="matrix-table">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>ProsperOps</th>
+          <th>CloudFix</th>
+          <th>Zesty</th>
+          <th class="col-sb">Strategic Blue</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Delivery Model</td><td>Fully automated SaaS</td><td>Fully automated SaaS</td><td>Automated platform</td><td class="cell-strong">Managed service + human expertise</td></tr>
+        <tr><td>Named Account Mgr</td><td class="cell-cross">No</td><td class="cell-cross">No</td><td class="cell-cross">No</td><td class="cell-check">Yes</td></tr>
+        <tr><td>Onboarding Speed</td><td class="cell-check">Hours</td><td class="cell-check">Minutes (claimed)</td><td class="cell-check">Minutes</td><td class="cell-partial">Days to weeks</td></tr>
+        <tr><td>Multi-Cloud</td><td class="cell-check">AWS, Azure, GCP</td><td class="cell-cross">AWS only</td><td class="cell-partial">AWS + Azure (partial)</td><td class="cell-cross">AWS only</td></tr>
+        <tr><td>FinOps Advisory</td><td class="cell-cross">No</td><td class="cell-cross">No</td><td class="cell-cross">No</td><td class="cell-check">Included</td></tr>
+        <tr><td>Convertible RI Risk</td><td class="cell-partial">Moderate</td><td class="cell-cross">High (core mechanism)</td><td class="cell-partial">Shifting to micro-SPs</td><td class="cell-cross">High (pooled model)</td></tr>
+        <tr><td>Independence</td><td class="cell-cross">Acquired by Flexera</td><td class="cell-check">Independent</td><td class="cell-check">Independent (funded)</td><td class="cell-check">Independent (bootstrapped)</td></tr>
+        <tr><td>UK Public Sector</td><td class="cell-cross">No</td><td class="cell-cross">No</td><td class="cell-cross">No</td><td class="cell-check">Yes, with reseller model</td></tr>
+        <tr><td>G2 Reviews</td><td>High Performer, 10+ reviews</td><td>Limited presence</td><td>AWS Marketplace reviews</td><td class="cell-strong">18 reviews, 5.0 stars</td></tr>
+        <tr><td>Free Assessment</td><td class="cell-check">Free demo + savings estimate</td><td class="cell-check">Free 30-day trial</td><td class="cell-check">Instant onboard</td><td class="cell-partial">Savings Portal (requires CUR)</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- Takeaway -->
+  <div class="takeaway">
+    <div class="takeaway-label">The White Space</div>
+    <p class="takeaway-text">
+      Every competitor leads with <strong>automation</strong> and <strong>minimal onboarding</strong>. None of them lead with human expertise or personal relationships. That's the structural gap Strategic Blue occupies. But in a market where every competitor offers a free trial, instant setup, and transparent pricing, the current requirement to share CUR access before seeing any value is a significant friction point. <strong>The self-serve assessment tool and the ReFocus forecasting pivot aren't just nice-to-haves. They're how Strategic Blue matches the low-friction entry point competitors already offer, while retaining the high-touch service model that none of them can replicate.</strong>
+    </p>
+  </div>
+
+</div>
+
+<script>
+  /* ===== MAIN TAB SWITCHING ===== */
+  function switchTab(id) {
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+    document.querySelector('.tab-btn[data-panel="' + id + '"]').classList.add('active');
+    document.getElementById('panel-' + id).classList.add('active');
+  }
+
+  /* ===== COMPETITOR TAB SWITCHING ===== */
+  function showComp(id) {
+    document.querySelectorAll('.comp-tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.comp-panel').forEach(function(p) { p.classList.remove('active'); });
+    document.querySelector('.comp-tab[data-comp="' + id + '"]').classList.add('active');
+    document.getElementById('comp-' + id).classList.add('active');
+  }
+
+  /* ===== ANALYSIS ACCORDION ===== */
+  function toggleAnalysis(header) {
+    header.parentElement.classList.toggle('open');
+  }
+
+  /* ===== MOAT CARD TOGGLE ===== */
+  function toggleMoat(header) {
+    header.parentElement.classList.toggle('open');
+  }
+
+  /* ===== MOAT DATA & RENDER ===== */
+  var moats = [
+    {
+      rank: 1, name: "ReFocus Forecasting & Proprietary Data Advantage", stage: "emerging",
+      description: "ReFocus positions Strategic Blue as the only provider leading with predictive intelligence for AWS compute spend. Rather than asking prospects to hand over billing data before seeing any value, the forecasting tool demonstrates insight upfront. As more customers onboard, anonymised spend patterns compound into a dataset no competitor can build from the outside. This is the moat the entire strategy is building towards: every new customer makes the forecasting smarter, which attracts more customers.",
+      dims: [
+        { label: "Current strength", score: 40, cls: "low", value: "Early stage" },
+        { label: "Long-term potential", score: 90, cls: "high", value: "Very high" },
+        { label: "Difficulty to replicate", score: 80, cls: "high", value: "High" }
+      ],
+      actions: [
+        "Confirm product readiness and define what the MVP forecast output looks like for a prospect",
+        "Develop a 'sample forecast' or demo experience that can be used in outbound campaigns",
+        "Build content that positions forecasting as the entry point, with rate optimisation as the natural next step",
+        "Design the data feedback loop: how does each new customer's data improve the model for everyone?"
+      ]
+    },
+    {
+      rank: 2, name: "Customer Stickiness & Switching Costs", stage: "established",
+      description: "Once a customer grants CUR access and onboards, they stay for 5+ years. Strategic Blue becomes embedded in the customer's AWS cost structure. Switching means re-onboarding with a competitor, re-sharing sensitive billing data, and risking a gap in optimisation coverage during transition. G2 reviewers describe the process as non-intrusive, but the financial dependency runs deep. This is an established advantage that gets even stronger as ReFocus adds a second layer of value on top of rate optimisation.",
+      dims: [
+        { label: "Current strength", score: 85, cls: "high", value: "Strong" },
+        { label: "Long-term potential", score: 90, cls: "high", value: "Very high" },
+        { label: "Difficulty to replicate", score: 80, cls: "high", value: "High" }
+      ],
+      actions: [
+        "Layer ReFocus forecasting on top of existing customer relationships to add a second retention reason",
+        "Quantify and communicate the 'cost of switching' in customer-facing materials to reinforce the value of staying",
+        "Develop a customer health dashboard so the team can proactively engage accounts before churn signals appear",
+        "Use long-tenured customer stories as social proof in Be Trusted content"
+      ]
+    },
+    {
+      rank: 3, name: "AWS Relationship & Referral Network", stage: "established",
+      description: "Strategic Blue has built deep trust with AWS account managers through years of joint work and initiatives like CFO training for AWS staff. AWS AMs are almost always consulted by prospects before buying, and when they recommend Strategic Blue, it carries significant weight. This is the closest thing to a network effect in the business: the more AWS AMs trust Strategic Blue's work, the more leads flow in pre-qualified and warm.",
+      dims: [
+        { label: "Current strength", score: 78, cls: "high", value: "Strong" },
+        { label: "Long-term potential", score: 80, cls: "high", value: "High" },
+        { label: "Difficulty to replicate", score: 85, cls: "high", value: "Very high" }
+      ],
+      actions: [
+        "Formalise the referral process so it's trackable and repeatable, not ad hoc",
+        "Create co-branded content or case studies that AWS AMs can share directly with their accounts",
+        "Expand CFO training sessions to new AWS regions and account teams",
+        "Build a feedback loop so AWS AMs hear about the outcomes of their referrals, reinforcing the relationship"
+      ]
+    },
+    {
+      rank: 4, name: "Commodity Trading Expertise", stage: "established",
+      description: "The commodity trading approach to commitment management is genuine institutional knowledge that competitors haven't replicated. It enables sophisticated risk management (targeting 90%+ coverage at 3-year discount rates while maintaining 20%+ flexibility) and underpins the confidence to guarantee they can always match or better any competitor's financial outcome. This expertise is what powers both the current savings engine and the forecasting intelligence behind ReFocus.",
+      dims: [
+        { label: "Current strength", score: 70, cls: "mid", value: "Solid" },
+        { label: "Long-term potential", score: 80, cls: "high", value: "High" },
+        { label: "Difficulty to replicate", score: 65, cls: "mid", value: "Moderate" }
+      ],
+      actions: [
+        "Codify the trading methodology into content that prospects can understand (without giving away the recipe)",
+        "Use ReFocus as the vehicle that makes this expertise tangible and scalable rather than locked in individuals' heads",
+        "Develop thought leadership that frames cloud cost management as a financial discipline, not just an engineering task",
+        "Position the team's trading background as a credibility signal in all outbound messaging"
+      ]
+    },
+    {
+      rank: 5, name: "Personal Touch & White Glove Service", stage: "established",
+      description: "Named account managers, real humans answering questions, help with edge cases and broader FinOps guidance. G2 reviews (5.0 stars across 18 reviews) consistently cite the personal relationship as the standout differentiator. In a market where competitors lead with automation and self-service dashboards, this human-first approach occupies a distinct position that resonates strongly with mid-market companies who want a partner, not just a platform.",
+      dims: [
+        { label: "Current strength", score: 75, cls: "high", value: "Strong" },
+        { label: "Long-term potential", score: 70, cls: "mid", value: "High with the right support" },
+        { label: "Difficulty to replicate", score: 75, cls: "high", value: "High" }
+      ],
+      actions: [
+        "Use ReFocus to automate top-of-funnel value delivery, freeing the human touch for where it creates the most differentiation",
+        "Systematise the onboarding experience so the personal touch is consistent, not dependent on individual bandwidth",
+        "Mine G2 reviews and customer quotes for specific messaging that brings this differentiator to life",
+        "Frame the personal touch in marketing as a strategic choice, not a limitation of scale"
+      ]
+    },
+    {
+      rank: 6, name: "UK Public Sector Foothold", stage: "developing",
+      description: "Trusted by UK universities and research organisations as a reseller with bundled FinOps services. Public sector procurement creates high barriers to entry (compliance requirements, established contracts, institutional trust) that take years to build. This is a defensible niche that also provides credibility and case study material for commercial sales in adjacent sectors.",
+      dims: [
+        { label: "Current strength", score: 62, cls: "mid", value: "Solid niche" },
+        { label: "Long-term potential", score: 65, cls: "mid", value: "Moderate" },
+        { label: "Difficulty to replicate", score: 60, cls: "mid", value: "Moderate" }
+      ],
+      actions: [
+        "Use public sector success stories as proof points in commercial marketing (redacted where needed)",
+        "Identify whether ReFocus has specific applications for research institutions with variable compute workloads",
+        "Protect the existing position by maintaining strong relationships even while commercial growth is the focus",
+        "Explore whether public sector references can open doors with regulated industries (finance, healthcare)"
+      ]
+    },
+    {
+      rank: 7, name: "Convertible RI & Pooled Commitment Model", stage: "developing",
+      description: "The ability to pool commitments across customers using convertible Reserved Instances delivers savings that DIY approaches and competitors using only Savings Plans cannot match. This is the mechanism behind the 'up to 45% savings' claim and the flexibility guarantee. While AWS is evolving its pricing tools over the next 3-5 years, this remains a powerful near-term differentiator and the primary proof point for new customer acquisition today.",
+      dims: [
+        { label: "Current strength", score: 70, cls: "mid", value: "Strong today" },
+        { label: "Long-term potential", score: 45, cls: "low", value: "Transitioning" },
+        { label: "Difficulty to replicate", score: 60, cls: "mid", value: "Moderate" }
+      ],
+      actions: [
+        "Use the current savings advantage aggressively in near-term campaigns to close deals while it's at full strength",
+        "Develop clear messaging that connects today's savings to tomorrow's forecasting: 'we save you money now and predict your costs going forward'",
+        "Build the bridge narrative: pooled commitments demonstrate what Strategic Blue can do, ReFocus shows where the relationship is going",
+        "Track AWS product changes closely to adapt positioning as the landscape evolves"
+      ]
+    },
+    {
+      rank: 8, name: "15-Year Track Record", stage: "emerging",
+      description: "Fifteen years of proven results, long-standing customer relationships, and deep domain credibility. This track record provides a foundation of trust that newer competitors cannot claim. The challenge isn't the record itself but making it visible. Once the Be Found strategy puts Strategic Blue in front of the right audiences, the longevity becomes a powerful trust signal rather than a hidden credential.",
+      dims: [
+        { label: "Current strength", score: 35, cls: "low", value: "Underleveraged" },
+        { label: "Long-term potential", score: 65, cls: "mid", value: "Strong once visible" },
+        { label: "Difficulty to replicate", score: 55, cls: "mid", value: "Inherently unique" }
+      ],
+      actions: [
+        "Build a 'proof wall' of customer outcomes, tenure stats, and savings delivered across 15 years",
+        "Develop a timeline narrative that shows evolution from reseller to FinOps partner to forecasting pioneer",
+        "Use longevity as a trust signal in CUR data-sharing conversations: 'we've been handling sensitive billing data since 2009'",
+        "Create comparison content that subtly highlights track record gaps in newer competitors"
+      ]
+    }
+  ];
+
+  function renderMoats() {
+    var container = document.getElementById('moat-list');
+    var html = '';
+    moats.forEach(function(m) {
+      html += '<div class="moat-card" data-index="' + m.rank + '">';
+      html += '  <div class="moat-header" onclick="toggleMoat(this)">';
+      html += '    <div class="moat-rank ' + m.stage + '">' + m.rank + '</div>';
+      html += '    <div class="moat-title-area">';
+      html += '      <span class="moat-name">' + m.name + '</span>';
+      html += '      <div class="moat-meta">';
+      html += '        <span class="moat-tag ' + m.stage + '">' + m.stage + '</span>';
+      html += '        <span class="moat-toggle">&#9662;</span>';
+      html += '      </div>';
+      html += '    </div>';
+      html += '  </div>';
+      html += '  <div class="moat-body">';
+      html += '    <p class="moat-description">' + m.description + '</p>';
+      html += '    <div class="moat-dims">';
+      m.dims.forEach(function(d) {
+        html += '    <div class="moat-bar-section">';
+        html += '      <div class="moat-bar-label">' + d.label + ' <span class="bar-value">' + d.value + '</span></div>';
+        html += '      <div class="moat-bar-track"><div class="moat-bar-fill ' + d.cls + '" style="width:' + d.score + '%"></div></div>';
+        html += '    </div>';
+      });
+      html += '    </div>';
+      html += '    <div class="moat-actions">';
+      html += '      <div class="actions-title">What it takes to strengthen this moat</div>';
+      html += '      <ul>';
+      m.actions.forEach(function(a) {
+        html += '        <li>' + a + '</li>';
+      });
+      html += '      </ul>';
+      html += '    </div>';
+      html += '  </div>';
+      html += '</div>';
+    });
+    container.innerHTML = html;
+  }
+
+  renderMoats();
+</script>
+</body>
+</html>
