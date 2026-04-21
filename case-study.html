@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Success Stories — Strategic Blue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sb-navy: #0A1B3D;
+    --sb-blue: #1E3A8A;
+    --sb-ink: #0B1220;
+    --sb-body: #374151;
+    --sb-muted: #6B7280;
+    --sb-line: #E5E7EB;
+    --sb-line-soft: #F1F3F7;
+    --sb-bg: #FFFFFF;
+    --sb-bg-soft: #F8FAFC;
+    --sb-shadow: 0 1px 2px rgba(11, 18, 32, 0.04), 0 8px 24px rgba(11, 18, 32, 0.06);
+    --sb-shadow-lg: 0 1px 2px rgba(11, 18, 32, 0.04), 0 20px 60px rgba(11, 18, 32, 0.12);
+    --sb-radius: 14px;
+    --sb-radius-sm: 10px;
+    --sans: "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--sb-body);
+    background: var(--sb-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .btn-primary { background: var(--sb-navy); color: #fff; }
+  .btn-primary:hover { background: var(--sb-blue); }
+  .btn-ghost { background: transparent; color: var(--sb-ink); border-color: var(--sb-line); }
+  .btn-ghost:hover { border-color: var(--sb-navy); }
+
+  /* HERO */
+  .hero {
+    padding: 72px 0 56px;
+    background:
+      radial-gradient(ellipse 80% 60% at 15% 10%, rgba(30, 58, 138, 0.045), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 95% 90%, rgba(30, 58, 138, 0.035), transparent 60%),
+      #fff;
+  }
+  .crumbs {
+    font-size: 13px;
+    color: var(--sb-muted);
+    margin-bottom: 18px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+  }
+  .crumbs a { color: var(--sb-muted); text-decoration: none; }
+  .crumbs a:hover { color: var(--sb-navy); }
+  .crumbs span.sep { opacity: 0.5; }
+
+  .hero-header {
+    max-width: 760px;
+    margin: 0 auto 88px;
+    text-align: center;
+  }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sb-blue);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-weight: 600;
+    font-size: clamp(36px, 4.6vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--sb-ink);
+    margin-bottom: 20px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    font-weight: 400;
+    color: var(--sb-blue);
+  }
+  .hero-lede {
+    font-size: 18px;
+    color: var(--sb-body);
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  /* FEATURED */
+  .featured {
+    background: #fff;
+    border: 1px solid var(--sb-line);
+    border-radius: var(--sb-radius);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    box-shadow: var(--sb-shadow-lg);
+    transition: transform 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+  }
+  .featured:hover { transform: translateY(-2px); }
+  .featured-media {
+    position: relative;
+    background: linear-gradient(135deg, #0A1B3D 0%, #1E3A8A 100%);
+    min-height: 440px;
+    overflow: hidden;
+  }
+  .featured-media::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.08), transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(255,255,255,0.05), transparent 40%);
+  }
+  .featured-media-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+  }
+  .featured-logo {
+    font-size: 52px;
+    font-weight: 500;
+    color: #fff;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    text-align: center;
+    opacity: 0.95;
+  }
+  .featured-logo small {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-top: 16px;
+  }
+  .featured-badge {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .featured-body {
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .featured-meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .tag {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--sb-blue);
+    background: rgba(30, 58, 138, 0.08);
+    padding: 5px 11px;
+    border-radius: 999px;
+  }
+  .tag.muted {
+    color: var(--sb-muted);
+    background: var(--sb-line-soft);
+  }
+  .featured-title {
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--sb-ink);
+    margin-bottom: 16px;
+  }
+  .featured-excerpt {
+    font-size: 16px;
+    color: var(--sb-body);
+    margin-bottom: 28px;
+  }
+  .featured-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    padding: 24px 0;
+    border-top: 1px solid var(--sb-line);
+    margin-bottom: 28px;
+  }
+  .featured-stat .num {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 1;
+    color: var(--sb-navy);
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .featured-stat .label {
+    font-size: 13px;
+    color: var(--sb-muted);
+  }
+  .read-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--sb-navy);
+    align-self: flex-start;
+  }
+  .read-link .arrow { transition: transform 0.2s ease; }
+  .read-link:hover .arrow { transform: translateX(4px); }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--sb-navy);
+    color: #fff;
+    padding: 56px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .stats-bar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 10% 50%, rgba(255,255,255,0.04), transparent 40%),
+      radial-gradient(circle at 90% 50%, rgba(255,255,255,0.03), transparent 40%);
+    pointer-events: none;
+  }
+  .stats-inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    position: relative;
+  }
+  .stat-item {
+    border-left: 1px solid rgba(255,255,255,0.12);
+    padding-left: 24px;
+  }
+  .stat-item:first-child {
+    border-left: none;
+    padding-left: 0;
+  }
+  .stat-num {
+    font-weight: 600;
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+  }
+  .stat-num .unit {
+    font-size: 28px;
+    opacity: 0.7;
+    font-weight: 500;
+  }
+  .stat-label {
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.75);
+    max-width: 220px;
+  }
+
+  /* FILTERS */
+  .filters-section {
+    padding: 72px 0 32px;
+    background: #fff;
+  }
+  .filters-header {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+  .filters-title {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--sb-ink);
+  }
+  .filters-count {
+    font-size: 14px;
+    color: var(--sb-muted);
+  }
+  .filters-count strong {
+    color: var(--sb-ink);
+    font-weight: 600;
+  }
+  .filters {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 16px;
+    background: var(--sb-bg-soft);
+    border: 1px solid var(--sb-line);
+    border-radius: var(--sb-radius);
+    margin-bottom: 48px;
+  }
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 200px;
+  }
+  .filter-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sb-muted);
+    padding-left: 4px;
+  }
+  .select-wrap { position: relative; }
+  .select-wrap::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    width: 8px;
+    height: 8px;
+    border-right: 1.5px solid var(--sb-ink);
+    border-bottom: 1.5px solid var(--sb-ink);
+    transform: translateY(-70%) rotate(45deg);
+    pointer-events: none;
+  }
+  select.filter-select {
+    width: 100%;
+    padding: 12px 40px 12px 14px;
+    border: 1px solid var(--sb-line);
+    border-radius: var(--sb-radius-sm);
+    background: #fff;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--sb-ink);
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  select.filter-select:hover { border-color: var(--sb-navy); }
+  select.filter-select:focus {
+    outline: none;
+    border-color: var(--sb-blue);
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.12);
+  }
+  .search-input {
+    width: 100%;
+    padding: 12px 14px 12px 40px;
+    border: 1px solid var(--sb-line);
+    border-radius: var(--sb-radius-sm);
+    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E") no-repeat 14px center;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--sb-ink);
+  }
+  .search-input:focus {
+    outline: none;
+    border-color: var(--sb-blue);
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.12);
+  }
+  .filter-clear { display: flex; align-items: end; }
+  .btn-clear {
+    padding: 12px 18px;
+    background: transparent;
+    border: 1px solid var(--sb-line);
+    border-radius: var(--sb-radius-sm);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--sb-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+  .btn-clear:hover { color: var(--sb-ink); border-color: var(--sb-navy); }
+
+  /* GRID */
+  .grid-section {
+    padding: 0 0 96px;
+    background: #fff;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .case-card {
+    background: #fff;
+    border: 1px solid var(--sb-line);
+    border-radius: var(--sb-radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    cursor: pointer;
+  }
+  .case-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sb-shadow);
+    border-color: #D1D5DB;
+  }
+  .case-media {
+    aspect-ratio: 16/10;
+    background: var(--sb-bg-soft);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+  }
+  .case-media::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.55;
+  }
+  .case-media.pattern-1::before {
+    background:
+      radial-gradient(circle at 30% 40%, rgba(30, 58, 138, 0.12), transparent 50%),
+      radial-gradient(circle at 70% 60%, rgba(10, 27, 61, 0.08), transparent 50%);
+  }
+  .case-media.pattern-2::before {
+    background:
+      linear-gradient(120deg, transparent 45%, rgba(30, 58, 138, 0.10) 45%, rgba(30, 58, 138, 0.10) 55%, transparent 55%),
+      linear-gradient(60deg, transparent 45%, rgba(10, 27, 61, 0.06) 45%, rgba(10, 27, 61, 0.06) 55%, transparent 55%);
+  }
+  .case-media.pattern-3::before {
+    background:
+      repeating-linear-gradient(0deg, transparent 0, transparent 18px, rgba(30, 58, 138, 0.08) 18px, rgba(30, 58, 138, 0.08) 19px);
+  }
+  .case-media.pattern-4::before {
+    background:
+      radial-gradient(circle at 50% 50%, rgba(30, 58, 138, 0.18), transparent 35%),
+      radial-gradient(circle at 50% 50%, rgba(30, 58, 138, 0.10), transparent 55%);
+  }
+  .case-media.pattern-5::before {
+    background:
+      linear-gradient(135deg, rgba(30, 58, 138, 0.10) 0%, transparent 50%, rgba(30, 58, 138, 0.06) 100%);
+  }
+  .case-media.pattern-6::before {
+    background:
+      repeating-linear-gradient(45deg, transparent 0, transparent 14px, rgba(30, 58, 138, 0.07) 14px, rgba(30, 58, 138, 0.07) 15px);
+  }
+  .case-logo {
+    position: relative;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--sb-navy);
+    letter-spacing: -0.01em;
+    text-align: center;
+    line-height: 1.1;
+    z-index: 1;
+  }
+  .case-body {
+    padding: 26px 26px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+  }
+  .case-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .case-title {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--sb-ink);
+  }
+  .case-result {
+    padding: 16px 0;
+    border-top: 1px solid var(--sb-line);
+    border-bottom: 1px solid var(--sb-line);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .case-result-num {
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 1;
+    color: var(--sb-navy);
+    letter-spacing: -0.02em;
+  }
+  .case-result-label {
+    font-size: 13px;
+    color: var(--sb-muted);
+    flex: 1;
+  }
+  .case-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--sb-muted);
+    margin-top: auto;
+  }
+  .case-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .case-meta-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--sb-muted);
+  }
+  .case-meta-value {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--sb-ink);
+  }
+
+  /* FOOTER CTA */
+  .footer-cta {
+    background: var(--sb-bg-soft);
+    padding: 80px 0;
+    border-top: 1px solid var(--sb-line);
+    text-align: center;
+  }
+  .footer-cta h2 {
+    font-weight: 600;
+    font-size: clamp(32px, 4vw, 44px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--sb-ink);
+    margin-bottom: 16px;
+  }
+  .footer-cta p {
+    font-size: 17px;
+    color: var(--sb-body);
+    max-width: 520px;
+    margin: 0 auto 32px;
+  }
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .featured { grid-template-columns: 1fr; }
+    .featured-media { min-height: 280px; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 32px 24px; }
+    .stat-item:nth-child(3) { border-left: none; padding-left: 0; }
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .container { padding: 0 20px; }
+    .hero { padding: 48px 0 40px; }
+    .featured-body { padding: 32px; }
+    .featured-media-inner { padding: 32px; }
+    .featured-logo { font-size: 38px; }
+    .featured-stats { grid-template-columns: 1fr; gap: 16px; }
+    .stats-bar { padding: 40px 0; }
+    .stats-inner { grid-template-columns: 1fr; gap: 28px; }
+    .stat-item { border-left: none !important; padding-left: 0 !important; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 28px; }
+    .stat-item:first-child { border-top: none; padding-top: 0; }
+    .stat-num { font-size: 44px; }
+    .filters-section { padding: 48px 0 24px; }
+    .filters-title { font-size: 28px; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="container">
+    <div class="crumbs">
+      <a href="#">Resources</a>
+      <span class="sep">/</span>
+      <span>Success Stories</span>
+    </div>
+
+    <div class="hero-header">
+      <div class="eyebrow">Success Stories</div>
+      <h1>Real cloud savings, <em>measured in real money</em></h1>
+      <p class="hero-lede">
+        The organisations below worked with Strategic Blue to cut cloud spend without locking themselves into rigid contracts or disrupting their engineering teams. These are the numbers.
+      </p>
+    </div>
+
+    <a href="#" class="featured">
+      <div class="featured-media">
+        <div class="featured-badge">Featured Story</div>
+        <div class="featured-media-inner">
+          <div class="featured-logo">
+            Company Name
+            <small>Sector</small>
+          </div>
+        </div>
+      </div>
+      <div class="featured-body">
+        <div>
+          <div class="featured-meta">
+            <span class="tag">Industry</span>
+            <span class="tag muted">Product</span>
+            <span class="tag muted">Region</span>
+          </div>
+          <h2 class="featured-title">Headline quote or story title about the engagement and outcome</h2>
+          <p class="featured-excerpt">
+            Two or three sentence summary of the customer's situation, what Strategic Blue did, and the measured outcome, keeping it specific and numbers-led where possible.
+          </p>
+        </div>
+
+        <div class="featured-stats">
+          <div class="featured-stat">
+            <div class="num">XX%</div>
+            <div class="label">Reduction in cloud spend</div>
+          </div>
+          <div class="featured-stat">
+            <div class="num">$XM</div>
+            <div class="label">Saved over X years</div>
+          </div>
+        </div>
+
+        <span class="read-link">
+          Read the full story
+          <span class="arrow">→</span>
+        </span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="stats-bar">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-num">95<span class="unit">%</span></div>
+        <div class="stat-label">of customers stay with us for the long-term</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">45<span class="unit">%</span></div>
+        <div class="stat-label">maximum AWS discount delivered through Automate</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3<span class="unit">yr</span></div>
+        <div class="stat-label">AWS discount without lock-in contracts</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">XX<span class="unit">+</span></div>
+        <div class="stat-label">enterprises saving with Strategic Blue</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="filters-section">
+  <div class="container">
+    <div class="filters-header">
+      <h2 class="filters-title">Browse all stories</h2>
+      <div class="filters-count">Showing <strong>8 of 8</strong> stories</div>
+    </div>
+
+    <div class="filters">
+      <div class="filter-group">
+        <label class="filter-label">Industry</label>
+        <div class="select-wrap">
+          <select class="filter-select">
+            <option>All industries</option>
+            <option>Higher Education</option>
+            <option>Financial Services</option>
+            <option>Travel &amp; Hospitality</option>
+            <option>Software &amp; SaaS</option>
+            <option>Public Sector</option>
+            <option>Gaming</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Product</label>
+        <div class="select-wrap">
+          <select class="filter-select">
+            <option>All products</option>
+            <option>Automate</option>
+            <option>Accelerate</option>
+            <option>Managed Services</option>
+            <option>FlexCommit</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Search</label>
+        <input type="text" class="search-input" placeholder="Search by company or keyword" />
+      </div>
+
+      <div class="filter-clear">
+        <button class="btn-clear" type="button">Clear filters</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="grid-section">
+  <div class="container">
+    <div class="grid">
+
+      <a href="#" class="case-card">
+        <div class="case-media pattern-1">
+          <div class="case-logo">University of<br/>California</div>
+        </div>
+        <div class="case-body">
+          <div class="case-tags"><span class="tag">Higher Education</span></div>
+          <h3 class="case-title">Short headline summarising the engagement</h3>
+          <div class="case-result">
+            <div class="case-result-num">XX%</div>
+            <div class="case-result-label">reduction in AWS compute spend</div>
+          </div>
+          <div class="case-meta">
+            <div class="case-meta-item"><span class="case-meta-label">Size</span><span class="case-meta-value">10,000+ staff</span></div>
+            <div class="case-meta-item"><span class="case-meta-label">Product</span><span class="case-meta-value">Automate</span></div>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="case-card">
+        <div class="case-media pattern-2">
+          <div class="case-logo">Traveltek</div>
+        </div>
+        <div class="case-body">
+          <div class="case-tags"><span class="tag">Travel &amp; Hospitality</span></div>
+          <h3 class="case-title">Short headline summarising the engagement</h3>
+          <div class="case-result">
+            <div class="case-result-num">$XM</div>
+            <div class="case-result-label">committed spend optimised</div>
+          </div>
+          <div class="case-meta">
+            <div class="case-meta-item"><span class="case-meta-label">Size</span><span class="case-meta-value">200-500 staff</span></div>
+            <div class="case-meta-item"><span class="case-meta-label">Product</span><span class="case-meta-value">FlexCommit</span></div>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="case-card">
+        <div class="case-media pattern-3">
+          <div class="case-logo">SnapLogic</div>
+        </div>
+        <div class="case-body">
+          <div class="case-tags"><span class="tag">Software &amp; SaaS</span></div>
+          <h3 class="case-title">Short headline summarising the engagement</h3>
+          <div class="case-result">
+            <div class="case-result-num">XX%</div>
+            <div class="case-result-label">saved on 3-year commitment</div>
+          </div>
+          <div class="case-meta">
+            <div class="case-meta-item"><span class="case-meta-label">Size</span><span class="case-meta-value">500-1000 staff</span></div>
+            <div class="case-meta-item"><span class="case-meta-label">Product</span><span class="case-meta-value">Automate</span></div>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="case-card">
+        <div class="case-media pattern-4">
+          <div class="case-logo">Team Satchel</div>
+        </div>
+        <div class="case-body">
+          <div class="case-tags"><span class="tag">EdTech</span></div>
+          <h3 class="case-title">Short headline summarising the engagement</h3>
+          <div class="case-result">
+            <div class="case-result-num">XX%</div>
+            <div class="case-result-label">cut from monthly AWS bill</div>
+          </div>
+          <div class="case-meta">
+            <div class="case-meta-item"><span class="case-meta-label">Size</span><span class="case-meta-value">50-200 staff</span></div>
+            <div class="case-meta-item"><span class="case-meta-label">Product</span><span class="case-meta-value">Managed Services</span></div>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="case-card">
+        <div class="case-media pattern-5">
+          <div class="case-logo">Preqin</div>
+        </div>
+        <div class="case-body">
+          <div class="case-tags"><span class="tag">Financial Services</span></div>
+          <h3 class="case-title">Short headline summarising the engagement</h3>
+          <div class="case-result">
+            <div class="case-result-num">$XM</div>
+            <div class="case-result-label">annual cloud savings unlocked</div>
+          </div>
+          <div class="case-meta">
+            <div class="case-meta-item"><span class="case-meta-label">Size</span><span class="case-meta-value">1000+ staff</span></div>
+            <div class="case-meta-item"><span class="case-meta-label">Product</span><span class="case-meta-value">FlexCommit</span></div>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="case-card">
+        <div class="case-media pattern-6">
+          <div class="case-logo">University<br/>of York</div>
+        </div>
+        <div class="case-body">
+          <div class="case-tags"><span class="tag">Higher Education</span></div>
+          <h3 class="case-title">Short headline summarising the engagement</h3>
+          <div class="case-result">
+            <div class="case-result-num">XX%</div>
+            <div class="case-result-label">saved across research workloads</div>
+          </div>
+          <div class="case-meta">
+            <div class="case-meta-item"><span class="case-meta-label">Size</span><span class="case-meta-value">5000+ staff</span></div>
+            <div class="case-meta-item"><span class="case-meta-label">Product</span><span class="case-meta-value">Accelerate</span></div>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="case-card">
+        <div class="case-media pattern-1">
+          <div class="case-logo">Client Name</div>
+        </div>
+        <div class="case-body">
+          <div class="case-tags"><span class="tag">Public Sector</span></div>
+          <h3 class="case-title">Short headline summarising the engagement</h3>
+          <div class="case-result">
+            <div class="case-result-num">XX%</div>
+            <div class="case-result-label">reduction in committed spend</div>
+          </div>
+          <div class="case-meta">
+            <div class="case-meta-item"><span class="case-meta-label">Size</span><span class="case-meta-value">Government agency</span></div>
+            <div class="case-meta-item"><span class="case-meta-label">Product</span><span class="case-meta-value">Accelerate</span></div>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="case-card">
+        <div class="case-media pattern-4">
+          <div class="case-logo">Client Name</div>
+        </div>
+        <div class="case-body">
+          <div class="case-tags"><span class="tag">Gaming</span></div>
+          <h3 class="case-title">Short headline summarising the engagement</h3>
+          <div class="case-result">
+            <div class="case-result-num">$XM</div>
+            <div class="case-result-label">saved scaling compute globally</div>
+          </div>
+          <div class="case-meta">
+            <div class="case-meta-item"><span class="case-meta-label">Size</span><span class="case-meta-value">200-500 staff</span></div>
+            <div class="case-meta-item"><span class="case-meta-label">Product</span><span class="case-meta-value">Automate</span></div>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="footer-cta">
+  <div class="container">
+    <h2>Your story could be next</h2>
+    <p>Book a call with a cloud cost specialist and see what Strategic Blue could unlock for your workloads.</p>
+    <div class="cta-row">
+      <a href="#" class="btn btn-primary">Book a call</a>
+      <a href="#" class="btn btn-ghost">Calculate savings</a>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
