@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copper | Strategic Blue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: #4D3DFF;
+            --accent-soft: rgba(77, 61, 255, 0.08);
+            --accent-muted: rgba(77, 61, 255, 0.04);
+            --text-primary: #0a0a0a;
+            --text-secondary: #5a5a5a;
+            --text-tertiary: #9a9a9a;
+            --bg: #ffffff;
+            --bg-subtle: #f8f8fa;
+            --border: rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, sans-serif;
+            color: var(--text-primary);
+            line-height: 1.6;
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .ambient-bg::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: -10%;
+            width: 40%;
+            height: 60%;
+            background: radial-gradient(ellipse, rgba(77, 61, 255, 0.12) 0%, transparent 70%);
+            filter: blur(40px);
+        }
+
+        .ambient-bg::after {
+            content: '';
+            position: absolute;
+            top: 15%;
+            right: -10%;
+            width: 40%;
+            height: 60%;
+            background: radial-gradient(ellipse, rgba(77, 61, 255, 0.1) 0%, transparent 70%);
+            filter: blur(40px);
+        }
+
+        header {
+            position: relative;
+            z-index: 10;
+            padding: 1.5rem 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .logo-mark {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .logo-mark .square {
+            width: 12px;
+            height: 12px;
+            background: #0a0a0a;
+        }
+
+        .logo-mark .circle {
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        nav {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .header-cta {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.65rem 1.25rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(77, 61, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: #0a0a0a;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 0.95rem;
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero {
+            padding: 4rem 0 6rem;
+        }
+
+        .breadcrumb {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: underline;
+        }
+
+        .breadcrumb-separator {
+            width: 4px;
+            height: 4px;
+            background: var(--text-tertiary);
+            border-radius: 50%;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .kicker {
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .hero-quote {
+            font-size: 3rem;
+            font-weight: 600;
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-description {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 520px;
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-visual-wrapper {
+            background: linear-gradient(135deg, #f0efff 0%, #e8e6ff 100%);
+            border-radius: 24px;
+            aspect-ratio: 4/5;
+            padding: 3rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 20px 60px rgba(77, 61, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-visual-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -20%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(77, 61, 255, 0.15) 0%, transparent 70%);
+        }
+
+        .ebitda-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ebitda-big {
+            font-size: 5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+            letter-spacing: -0.04em;
+            margin: 1rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ebitda-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ebitda-breakdown {
+            border-top: 1px solid rgba(77, 61, 255, 0.2);
+            padding-top: 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .breakdown-item {
+            font-size: 0.8rem;
+        }
+
+        .breakdown-label {
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .breakdown-value {
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        .metadata-bar {
+            background: var(--bg-subtle);
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .metadata-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+        }
+
+        .metadata-item {
+            position: relative;
+            padding-top: 1rem;
+        }
+
+        .metadata-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 32px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .metadata-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .metadata-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .stats-section {
+            padding: 6rem 0;
+        }
+
+        .section-label {
+            text-align: center;
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            line-height: 1.7;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-card {
+            padding: 2.5rem 2rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(77, 61, 255, 0.08);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-soft);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--accent);
+        }
+
+        .stat-value {
+            font-size: 2.75rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .comparison-section {
+            padding: 6rem 0;
+            background: var(--bg-subtle);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .comparison-column {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+        }
+
+        .comparison-column.before {
+            background: #F4F4F6;
+        }
+
+        .comparison-column.after {
+            background: #F3F0FF;
+        }
+
+        .comparison-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .comparison-column.before .comparison-title {
+            color: #6B7280;
+        }
+
+        .comparison-column.after .comparison-title {
+            color: var(--accent);
+        }
+
+        .comparison-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .comparison-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .icon-wrap {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+        }
+
+        .before .icon-wrap {
+            color: #6B7280;
+        }
+
+        .after .icon-wrap {
+            color: var(--accent);
+        }
+
+        .content-section {
+            padding: 6rem 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            max-width: 1100px;
+            margin: 0 auto 4rem;
+        }
+
+        .content-grid:last-child {
+            margin-bottom: 0;
+        }
+
+        .content-grid h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .content-grid p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+
+        .content-grid p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Portfolio health check section */
+        .portfolio-section {
+            padding: 6rem 0;
+            background: var(--bg-subtle);
+        }
+
+        .portfolio-card {
+            background: white;
+            border-radius: 24px;
+            padding: 5rem 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(77, 61, 255, 0.08);
+        }
+
+        .portfolio-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 100%;
+            background: radial-gradient(ellipse, rgba(77, 61, 255, 0.08) 0%, transparent 70%);
+        }
+
+        .portfolio-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .portfolio-card h2 {
+            font-size: 2.25rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-card > .portfolio-content > p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            text-align: left;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .check-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-text {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Similar case studies */
+        .similar-section {
+            padding: 6rem 0;
+        }
+
+        .case-studies-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .case-study-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .case-study-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(77, 61, 255, 0.08);
+        }
+
+        .case-study-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+        }
+
+        .case-study-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .case-study-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .case-study-link {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        @media (max-width: 900px) {
+            .hero-grid,
+            .content-grid,
+            .comparison-grid,
+            .case-studies-grid,
+            .stats-grid,
+            .metadata-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats-grid,
+            .metadata-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .hero-quote {
+                font-size: 2rem;
+            }
+
+            .section-title,
+            .portfolio-card h2 {
+                font-size: 1.75rem;
+            }
+
+            .ebitda-big {
+                font-size: 3.5rem;
+            }
+
+            .hero {
+                padding: 2rem 0 4rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .comparison-column,
+            .portfolio-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-bg"></div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-mark">
+                        <div class="square"></div>
+                        <div class="circle"></div>
+                    </div>
+                    Strategic Blue
+                </div>
+                <nav>
+                    <a href="#">Solution</a>
+                    <a href="#">Who it's for</a>
+                    <a href="#">How it works</a>
+                    <a href="#">Resources</a>
+                    <a href="#">About</a>
+                </nav>
+                <div class="header-cta">
+                    <button class="btn btn-primary">Calculate savings</button>
+                    <button class="btn btn-secondary">Book a call</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="#">Resources</a>
+                    <span class="breadcrumb-separator"></span>
+                    <a href="#">Success Stories</a>
+                    <span class="breadcrumb-separator"></span>
+                    <span>Copper</span>
+                </div>
+
+                <div class="hero-grid">
+                    <div>
+                        <div class="kicker">Enterprise SaaS unlocks $227k EBITDA expansion with zero engineering effort</div>
+                        <h1 class="hero-quote">"Immediate bottom-line impact with no technical changes, no engineering effort, no distractions from our product roadmap."</h1>
+                        <p class="hero-description">Copper is a high-growth enterprise SaaS business with over $1.9M in annual AWS spend. By partnering with Strategic Blue, the portfolio company unlocked significant EBITDA expansion while allowing their engineering team to remain focused on core innovation.</p>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="hero-visual-wrapper">
+                            <div class="ebitda-label">Direct EBITDA expansion</div>
+                            <div>
+                                <div class="ebitda-big">$227k</div>
+                                <div class="ebitda-description">Delivered over 12 months of partnership, sustained through infrastructure changes</div>
+                            </div>
+                            <div class="ebitda-breakdown">
+                                <div class="breakdown-item">
+                                    <div class="breakdown-label">With marketplace</div>
+                                    <div class="breakdown-value">$1.91M</div>
+                                </div>
+                                <div class="breakdown-item">
+                                    <div class="breakdown-label">Without marketplace</div>
+                                    <div class="breakdown-value">$1.68M</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="metadata-bar">
+            <div class="container">
+                <div class="metadata-grid">
+                    <div class="metadata-item">
+                        <div class="metadata-label">Industry</div>
+                        <div class="metadata-value">Enterprise SaaS</div>
+                    </div>
+                    <div class="metadata-item">
+                        <div class="metadata-label">Company size</div>
+                        <div class="metadata-value">High-growth</div>
+                    </div>
+                    <div class="metadata-item">
+                        <div class="metadata-label">Annual AWS spend</div>
+                        <div class="metadata-value">$1.9M+</div>
+                    </div>
+                    <div class="metadata-item">
+                        <div class="metadata-label">Analysis period</div>
+                        <div class="metadata-value">Mar 25 - Feb 26</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <div class="container">
+                <div class="section-label">Portfolio-wide value creation</div>
+                <h2 class="section-title">Measurable impact across every metric</h2>
+                <p class="section-subtitle">Strategic Blue's FinOps expertise delivered direct bottom-line impact for Copper with zero technical changes to their AWS infrastructure.</p>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </div>
+                        <div class="stat-value">31%</div>
+                        <div class="stat-label">Savings on eligible services</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="stat-value">13%</div>
+                        <div class="stat-label">Net invoice reduction</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">Commitment utilization</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                            </svg>
+                        </div>
+                        <div class="stat-value">30d</div>
+                        <div class="stat-label">Time to first savings</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="comparison-section">
+            <div class="container">
+                <div class="section-label">The transformation</div>
+                <h2 class="section-title">From cost uncertainty to predictable portfolio value</h2>
+                <p class="section-subtitle">See how Copper's approach to AWS cost management transformed after partnering with Strategic Blue.</p>
+
+                <div class="comparison-grid">
+                    <div class="comparison-column before">
+                        <div class="comparison-title">Before Strategic Blue</div>
+                        <ul class="comparison-list">
+                            <li>
+                                <div class="icon-wrap">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </div>
+                                <span>Undiscounted on-demand rates eroding margin</span>
+                            </li>
+                            <li>
+                                <div class="icon-wrap">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </div>
+                                <span>Rigid vendor commitments limiting technical flexibility</span>
+                            </li>
+                            <li>
+                                <div class="icon-wrap">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </div>
+                                <span>Engineering time consumed by cost optimization</span>
+                            </li>
+                            <li>
+                                <div class="icon-wrap">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </div>
+                                <span>Unpredictable cloud spend impacting EBITDA</span>
+                            </li>
+                            <li>
+                                <div class="icon-wrap">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </div>
+                                <span>Limited visibility into cost drivers and trends</span>
+                            </li>
+                            <li>
+                                <div class="icon-wrap">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </div>
+                                <span>Lock-in risk from DIY commitment strategies</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="comparison-column after">
+                        <div class="comparison-title">After Strategic Blue</div>
+                        <ul class="comparison-list">
+                            <li>
+                                <div class="icon-wrap">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span>$227k direct EBITDA expansion in 12 months</span>
+                            </li>
+                            <li>
+                                <div class="icon-wrap">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span>31% savings on eligible AWS services</span>
+                            </li>
+                            <li>
+                                <div class="icon-wrap">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span>100% commitment utilization with no waste</span>
+                            </li>
+                            <li>
+                                <div class="icon-wrap">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span>Flexible approach with zero vendor lock-in</span>
+                            </li>
+                            <li>
+                                <div class="icon-wrap">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span>Engineering team focused on product roadmap</span>
+                            </li>
+                            <li>
+                                <div class="icon-wrap">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span>Immediate bottom-line impact in under 30 days</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <div class="content-grid">
+                    <div>
+                        <div class="section-label" style="text-align: left;">01 Challenge</div>
+                        <h2>Delivering value without disrupting the roadmap</h2>
+                    </div>
+                    <div>
+                        <p>As a high-growth portfolio company, Copper was balancing rapid product development with increasing cloud infrastructure costs. Their AWS spend had grown to over $1.9 million annually, but a significant portion of compute was still being charged at undiscounted, on-demand rates.</p>
+                        <p>The investment thesis depended on sustained margin expansion, but optimizing cloud spend traditionally required engineering time that Copper could not spare from their product roadmap. Previous attempts at DIY commitment management had created rigid vendor lock-in without delivering proportional savings.</p>
+                        <p>Copper needed a partner who could deliver immediate bottom-line value, require zero technical changes, preserve technical and financial flexibility, and provide visibility suitable for board-level reporting.</p>
+                    </div>
+                </div>
+
+                <div class="content-grid">
+                    <div>
+                        <div class="section-label" style="text-align: left;">02 Solution</div>
+                        <h2>Portfolio-wide FinOps with zero engineering effort</h2>
+                    </div>
+                    <div>
+                        <p>Strategic Blue deployed their non-intrusive AWS FinOps Assessment, requiring no access to Copper's workloads or application data. The assessment identified immediate savings opportunities across eligible services including EC2, Fargate, Lambda, and RDS.</p>
+                        <p>Through a careful blend of Reserved Instances and Savings Plans managed in dedicated accounts, Strategic Blue achieved 31% savings on eligible services while maintaining 100% commitment utilization. Crucially, this was delivered without any technical changes to Copper's infrastructure.</p>
+                        <p>Strategic Blue's approach avoided the rigid multi-year commitments that typically come with DIY optimization, giving Copper the financial and technical flexibility to evolve their architecture as the business scaled.</p>
+                    </div>
+                </div>
+
+                <div class="content-grid">
+                    <div>
+                        <div class="section-label" style="text-align: left;">03 Results</div>
+                        <h2>$227k EBITDA expansion, sustained over 12 months</h2>
+                    </div>
+                    <div>
+                        <p>Over the last 12 months, Strategic Blue delivered $227k in direct EBITDA expansion for Copper on their AWS usage. This was achieved through a 31% net savings rate on eligible services and 100% commitment utilization, with savings applied directly to the invoice.</p>
+                        <p>The cost savings achieved have freed up budget and enabled Copper to prioritize other key parts of their business, from product development to customer acquisition. The engineering team remained focused on the product roadmap throughout the partnership, with zero hours spent on cost optimization.</p>
+                        <p>As Copper continues to scale, Strategic Blue's proactive approach to identifying new savings opportunities will continue to play a key role in sustained margin expansion and portfolio-level value creation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="portfolio-section">
+            <div class="container">
+                <div class="portfolio-card">
+                    <div class="portfolio-content">
+                        <div class="section-label">Portfolio Health Check</div>
+                        <h2>Complimentary assessment for your strategic investments</h2>
+                        <p>We offer a free Portfolio Health Check for your 5 most strategic investments. Zero obligation, immediate visibility into potential savings across your portfolio.</p>
+
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <div class="check-icon">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="feature-text">Non-intrusive AWS FinOps Assessment</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="check-icon">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="feature-text">Bottom-line impact in under 30 days</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="check-icon">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="feature-text">Target scale: $500k+ annual cloud spend</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="check-icon">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="feature-text">No technical changes required</div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary btn-large">Book your portfolio health check</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="similar-section">
+            <div class="container">
+                <div class="section-label">Related success stories</div>
+                <h2 class="section-title">More portfolio value creation stories</h2>
+                <p class="section-subtitle">See how other portfolio companies are unlocking EBITDA expansion through cloud cost optimization.</p>
+
+                <div class="case-studies-grid">
+                    <a href="#" class="case-study-card">
+                        <div class="case-study-label">Enterprise Software</div>
+                        <h3>SnapLogic</h3>
+                        <p>Enterprise software company SnapLogic outsourced their rate optimization decisions so they could concentrate on growing the business, achieving 45% savings.</p>
+                        <span class="case-study-link">
+                            Read success story
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </span>
+                    </a>
+
+                    <a href="#" class="case-study-card">
+                        <div class="case-study-label">Travel Technology</div>
+                        <h3>Traveltek</h3>
+                        <p>Travel technology leader Traveltek sustains 12% AWS savings despite 8% usage growth, freeing up their DevOps team to focus on innovation.</p>
+                        <span class="case-study-link">
+                            Read success story
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </span>
+                    </a>
+
+                    <a href="#" class="case-study-card">
+                        <div class="case-study-label">Financial Data</div>
+                        <h3>Preqin</h3>
+                        <p>Preqin monitors thousands of sources to provide timely data and was searching for cost reduction that fits its changing environments and evolving infrastructure.</p>
+                        <span class="case-study-link">
+                            Read success story
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            © 2026 Strategic Blue. All Rights Reserved.
+        </div>
+    </footer>
+</body>
+</html>
